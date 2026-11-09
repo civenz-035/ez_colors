@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# QA smoke test for bash-colors plugin
+# QA smoke test for ez_colors plugin
 set -euo pipefail
 
-PLUGIN="/home/joez/bash-colors"
+PLUGIN="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PASS=0
 FAIL=0
 
@@ -10,7 +10,7 @@ pass() { echo "✅ PASS: $*"; PASS=$(( PASS + 1 )); }
 fail() { echo "❌ FAIL: $*"; FAIL=$(( FAIL + 1 )); }
 
 echo "==================================================="
-echo "  bash-colors — QA Smoke Test"
+echo "  ez_colors — QA Smoke Test"
 echo "==================================================="
 
 # Source
@@ -71,4 +71,3 @@ echo "==================================================="
 echo "  Results: $PASS passed, $FAIL failed"
 echo "==================================================="
 (( FAIL == 0 )) && echo "🎉 ALL TESTS PASSED" || { echo "❌ SOME TESTS FAILED"; exit 1; }
-

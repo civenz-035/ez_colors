@@ -1,4 +1,4 @@
-# bash-colors
+# ez_colors
 
 > A zero-dependency, modular Bash/Zsh color toolkit for terminal scripts, prompts, and CLIs.
 
@@ -10,24 +10,24 @@
 ## 🚀 One-Line Install (แจกเพื่อนรันคำสั่งเดียวจบ)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/civenz-035/bash-colors/main/install.sh | bash -s -- --rc
+curl -fsSL https://raw.githubusercontent.com/civenz-035/ez_colors/main/install.sh | bash -s -- --rc
 ```
 
-*(คำสั่งนี้จะดาวน์โหลดลง `~/.bash-colors` และเพิ่มคำสั่ง source ลงใน `.bashrc` และ `.zshrc` ให้อัตโนมัติ)*
+*(คำสั่งนี้จะดาวน์โหลดลง `~/.ez_colors` และเพิ่มคำสั่ง source ลงใน `.bashrc` และ `.zshrc` ให้อัตโนมัติ)*
 
 ---
 
 ## 📦 Manual Installation / Git Clone
 
 ```bash
-git clone https://github.com/civenz-035/bash-colors.git
-cd bash-colors
+git clone https://github.com/civenz-035/ez_colors.git
+cd ez_colors
 bash install.sh --rc
 ```
 
 โหลดเข้า session ปัจจุบันทันที:
 ```bash
-source ~/.bash-colors/colors.sh
+source ~/.ez_colors/colors.sh
 ```
 
 ---
@@ -119,7 +119,7 @@ ctab "b82:20 244:30" "Command" "Description"
 ctab "46:20 250:30" "colors" "Standalone color engine"
 
 # Box card auto-fit
-box_card --border 82 "bash-colors" "---" "Version 3.0.0" "Ready to use"
+box_card --border 82 "ez_colors" "---" "Version 3.0.0" "Ready to use"
 ```
 
 ---
@@ -127,7 +127,7 @@ box_card --border 82 "bash-colors" "---" "Version 3.0.0" "Ready to use"
 ## 🗂 Project Structure
 
 ```
-bash-colors/
+ez_colors/
 ├── colors.sh          ← Main Entry (source ไฟล์นี้ไฟล์เดียวจบ)
 ├── install.sh         ← Remote & local installer
 ├── uninstall.sh       ← Uninstaller + clean ~/.bashrc

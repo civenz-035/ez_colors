@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # ============================================================
-# uninstall.sh — bash-colors uninstaller
+# uninstall.sh — ez_colors uninstaller
 # Usage:  bash uninstall.sh [--prefix <dir>]
 # ============================================================
 set -euo pipefail
 
-PREFIX="${HOME}/.bash-colors"
+PREFIX="${HOME}/.ez_colors"
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -14,7 +14,7 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-MARKER="# bash-colors"
+MARKER="# ez_colors"
 
 if [[ -d "$PREFIX" ]]; then
     rm -rf "$PREFIX"
@@ -26,7 +26,6 @@ fi
 _remove_from_rc() {
     local rcfile="$1"
     if [[ -f "$rcfile" ]] && grep -qF "$MARKER" "$rcfile"; then
-        # Remove the marker line and the source line following it
         sed -i.bak "/$MARKER/,+1d" "$rcfile"
         echo "  ↳ $rcfile — source line removed."
     fi
@@ -36,4 +35,3 @@ _remove_from_rc "$HOME/.bashrc"
 _remove_from_rc "$HOME/.zshrc"
 
 echo "Done. Restart your shell to deactivate."
-

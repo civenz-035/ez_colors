@@ -1,26 +1,26 @@
 #!/usr/bin/env bash
 # ============================================================
-# install.sh — bash-colors installer
+# install.sh — ez_colors installer
 #
 # Supports both:
 #   1. Remote one-liner (curl | bash):
-#      curl -fsSL https://raw.githubusercontent.com/civenz-035/bash-colors/main/install.sh | bash -s -- --rc
+#      curl -fsSL https://raw.githubusercontent.com/civenz-035/ez_colors/main/install.sh | bash -s -- --rc
 #
 #   2. Local clone:
-#      git clone https://github.com/civenz-035/bash-colors.git
-#      cd bash-colors && bash install.sh --rc
+#      git clone https://github.com/civenz-035/ez_colors.git
+#      cd ez_colors && bash install.sh --rc
 #
 # Options:
-#   --prefix <dir>   Install directory (default: ~/.bash-colors)
+#   --prefix <dir>   Install directory (default: ~/.ez_colors)
 #   --bashrc         Auto-append source line to ~/.bashrc
 #   --zshrc          Auto-append source line to ~/.zshrc
 #   --rc             Auto-append to both ~/.bashrc and ~/.zshrc (Recommended)
 # ============================================================
 set -euo pipefail
 
-REPO_URL="https://github.com/civenz-035/bash-colors.git"
-RAW_BASE_URL="https://raw.githubusercontent.com/civenz-035/bash-colors/main"
-PREFIX="${HOME}/.bash-colors"
+REPO_URL="https://github.com/civenz-035/ez_colors.git"
+RAW_BASE_URL="https://raw.githubusercontent.com/civenz-035/ez_colors/main"
+PREFIX="${HOME}/.ez_colors"
 ADD_BASHRC=0
 ADD_ZSHRC=0
 
@@ -45,7 +45,7 @@ if (( ADD_BASHRC == 0 && ADD_ZSHRC == 0 )) && [ ! -t 0 ]; then
 fi
 
 echo "==================================================="
-echo "  Installing bash-colors to: $PREFIX"
+echo "  Installing ez_colors to: $PREFIX"
 echo "==================================================="
 
 mkdir -p "$PREFIX/lib"
@@ -91,7 +91,7 @@ fi
 chmod +x "$PREFIX/colors.sh"
 
 SOURCE_LINE="source \"$PREFIX/colors.sh\""
-MARKER="# bash-colors"
+MARKER="# ez_colors"
 
 _append_to_rc() {
     local rcfile="$1"
@@ -110,9 +110,9 @@ _append_to_rc() {
 (( ADD_ZSHRC  )) && _append_to_rc "$HOME/.zshrc"
 
 echo ""
-echo "✅ bash-colors successfully installed!"
+echo "✅ ez_colors successfully installed!"
 echo ""
 echo "Quick Start:"
 echo "  1. Reload your shell:  source \"$PREFIX/colors.sh\""
-echo "  2. Test a color:       cn 208 b \"Hello bash-colors!\""
+echo "  2. Test a color:       cn 208 b \"Hello ez_colors!\""
 echo "  3. Test rainbow:       mc \"Rainbow text works!\""

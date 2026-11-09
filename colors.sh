@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 # ============================================================
-# colors.sh — bash-colors Plugin Entry Point
+# colors.sh — ez_colors Plugin Entry Point
 # Source this file to load the full color toolkit:
 #
-#   source /path/to/bash-colors/colors.sh
+#   source /path/to/ez_colors/colors.sh
 #   # or in ~/.bashrc / ~/.zshrc:
-#   source "$HOME/.bash-colors/colors.sh"
+#   source "$HOME/.ez_colors/colors.sh"
 #
 # Version: 3.0.0
-# Repo:    https://github.com/civenz-035/bash-colors
+# Repo:    https://github.com/civenz-035/ez_colors
 # ============================================================
 
 # Resolve the directory this file lives in (works when sourced in bash or zsh)
