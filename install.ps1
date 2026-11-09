@@ -1,4 +1,4 @@
-﻿# ============================================================
+# ============================================================
 # install.ps1 — ez_colors Windows/PowerShell One-Line Installer
 #
 # Usage (One-liner for friends):

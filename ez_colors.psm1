@@ -1,4 +1,4 @@
-﻿# ============================================================
+# ============================================================
 # ez_colors.psm1 — PowerShell Color Engine (Dual-Engine for Windows)
 # Zero-dependency, compatible with Windows PowerShell 5.1 & PowerShell 7+
 # ============================================================
