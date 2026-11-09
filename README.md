@@ -1,148 +1,110 @@
-# ez_colors
+# ez_colors 🎨
 
-> A zero-dependency, modular Bash/Zsh color toolkit for terminal scripts, prompts, and CLIs.
+> A zero-dependency, modular, cross-platform terminal color & UI toolkit for **Bash**, **Zsh**, and **PowerShell**.
 
-[![Shell](https://img.shields.io/badge/shell-bash%20%7C%20zsh-blue)](https://www.gnu.org/software/bash/)
+[![Shell](https://img.shields.io/badge/shell-bash%20%7C%20zsh%20%7C%20powershell-blue)](https://github.com/civenz-035/ez_colors)
+[![Platform](https://img.shields.io/badge/platform-linux%20%7C%20macos%20%7C%20windows-orange)](https://github.com/civenz-035/ez_colors)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 ---
 
 ## 🚀 One-Line Install (แจกเพื่อนรันคำสั่งเดียวจบ)
 
+### 🪟 สำหรับเพื่อนที่ใช้ Windows (PowerShell)
+เปิด **PowerShell** ธรรมดาขึ้นมา แล้วก๊อปวางคำสั่งนี้ได้ทันที:
+```powershell
+irm https://raw.githubusercontent.com/civenz-035/ez_colors/main/install.ps1 | iex
+```
+*(ติดตั้งเข้า `$HOME\Documents\PowerShell\Modules\ez_colors` และเปิดใช้งานใน `$PROFILE` อัตโนมัติ — เปิด PowerShell มาใหม่ก็ใช้ได้เลย)*
+
+---
+
+### 🐧 สำหรับเพื่อนที่ใช้ Linux / macOS / WSL (Bash/Zsh)
+เปิด **Terminal** แล้วก๊อปวางคำสั่งนี้ได้ทันที:
 ```bash
 curl -fsSL https://raw.githubusercontent.com/civenz-035/ez_colors/main/install.sh | bash -s -- --rc
 ```
-
-*(คำสั่งนี้จะดาวน์โหลดลง `~/.ez_colors` และเพิ่มคำสั่ง source ลงใน `.bashrc` และ `.zshrc` ให้อัตโนมัติ)*
-
----
-
-## 📦 Manual Installation / Git Clone
-
-```bash
-git clone https://github.com/civenz-035/ez_colors.git
-cd ez_colors
-bash install.sh --rc
-```
-
-โหลดเข้า session ปัจจุบันทันที:
-```bash
-source ~/.ez_colors/colors.sh
-```
+*(ดาวน์โหลดลง `~/.ez_colors` และเพิ่มคำสั่งโหลดอัตโนมัติใน `.bashrc` / `.zshrc` ให้ทันที)*
 
 ---
 
-## ✨ Features
+## ✨ Features (ทำงานเหมือนกัน 100% ทั้ง 2 ระบบ)
 
-| Category | Functions |
-|---|---|
-| **Core render** | `c` `cn` `psc` `color` |
-| **Background** | `cbg` `cbgl` |
-| **Gradient / Rainbow** | `mc` `rainbow_palette` `jmc` `mcbg` `paint` |
-| **Random color** | `random_color` `rc` `rc1` `rc2` `rc3` `rc4` |
-| **Random per-char** | `rcc` `rcc1` `rcc2` `Rcc` `rc_char` |
-| **Tables & Layout** | `ctab` `hline` `box_card` `draw_` `get_real_width` |
-| **Status helpers** | `_warn` `_er` `_sc` `_ok` `_ep` |
-| **Color charts** | `c256` `c256bg` `color_comparison` |
+| หมวดหมู่ | Functions | ตัวอย่างคำสั่ง |
+|---|---|---|
+| **Core Color** | `c`, `cn`, `color` | `cn 208 b "ข้อความส้มตัวหนา"` |
+| **Short Names** | `r`, `g`, `y`, `b`, `cr`, `ora` | `cn ora "สีส้ม"` หรือ `c g "สีเขียวต่อท้าย "` |
+| **Gradients / Rainbow** | `mc`, `rainbow_palette` | `mc "สีรุ้ง"` หรือ `mc -b "เฉดสีฟ้า"` |
+| **Random Color** | `rc`, `rc1`, `rc2`, `rc3` | `rc "สุ่มสีสดใส"` หรือ `rc1 "สุ่มพาสเทล"` |
+| **Random Per-Char** | `rcc`, `rcc1`, `rcc2` | `rcc "สลับสีทุกตัวอักษรไม่ซ้ำกัน"` |
+| **Status Helpers** | `_ok`, `_sc`, `_warn`, `_er`, `_ep` | `_ok "สำเร็จ"` หรือ `_warn "เตือน"` |
+| **Layout & Cards** | `box_card`, `ctab`, `hline` | `box_card "หัวข้อ" "---" "เนื้อหา"` |
+| **Reference Charts** | `c256` | พิมพ์ชาร์ตสี 256 สีทั้งหมด |
 
 ---
 
-## 🎨 Usage Examples
+## 🎨 Usage Examples (ตัวอย่างการใช้งาน)
 
-### 1. Basic Color Printing
-
-```bash
-# c <color> [style] <text...>  (ไม่มี newline - ใช้ต่อคำในบรรทัดเดียวกันได้)
+### 1. พิมพ์ข้อความสีพื้นฐาน
+```powershell
+# PowerShell หรือ Bash ใช้ไวยากรณ์เดียวกัน
 c 208 "orange text " 
 c 82 b "[STATUS] "
 cn 45 "done"                   # cn = ขึ้นบรรทัดใหม่
-
-# Named shortcuts
-cn r  "red text"
-cn g  "green text"
-cn y  "yellow text"
-cn ora "orange text"
 ```
 
-### 2. Rainbow & Gradients
-
-```bash
-mc "Hello World"                      # รุ้ง 7 สีมาตรฐาน
-mc -b "Blue gradient"                 # ไล่เฉดฟ้า-น้ำเงิน
+### 2. ไล่เฉดสีรุ้ง (Gradients)
+```powershell
+mc "Hello World"                      # รุ้งมาตรฐาน
+mc -b "Blue gradient"                 # ไล่เฉดสีฟ้า-น้ำเงิน
 mc -pk b "Pink bold gradient"         # ไล่เฉดชมพู ตัวหนา
-mc -b -c "Blue to Cyan mix"           # ผสม palette
-rainbow_palette --fire "🔥 Fire"
+mc --fire "Fire gradient"             # สีไฟลุก เปลวเพลิง
+mc --ice "Ice arctic gradient"        # สีน้ำแข็ง
 ```
 
-### 3. Background Colors (รักษา foreground เดิมไว้)
-
-```bash
-cbg 33 "blue background text"
-cbgl 208 "orange bg with newline"
-cbg -ps 33 "PS1-safe background"      # ปลอดภัยสำหรับ prompt PS1
+### 3. ป้ายแจ้งเตือนสถานะ (Status Indicators)
+```powershell
+_sc   "Operation completed successfully"    # สีเขียว + ✅
+_ok   "All checks passed"                   # เหมือน _sc
+_warn "Configuration file not found"        # สีเหลือง + ⚠
+_er   "Fatal error occurred"                # สีแดง + ⛔
+_ep   "Additional details and notes"        # สีฟ้าสดใส
 ```
 
-### 4. Random Color Engine (Stateful RNG)
-
-```bash
-rc "Random vibrant color"             # สุ่มสีสดใส (12 เฉดสี)
-rc1 "Soft pastel"                     # สุ่มสีพาสเทล
-rc2 b "Neon bold"                     # สุ่มสีนีออน
-rc3 "Dim/Dark"                        # สุ่มสีเข้ม
-
-# ล็อกสีให้เหมือนกันทั้งหน้าต่างด้วย slot
-rc -s my_border "Border color 1"
-rc -s my_border "Border color 2"      # ได้สีเดิมเสมอ
-```
-
-### 5. Random Per-Character (สลับสีทุกตัวอักษร)
-
-```bash
-rcc "Every single character has a unique color!"
-rcc1 b "Pastel bold chars"
-```
-
-### 6. Status Helpers (พร้อมใช้งานทันที)
-
-```bash
-_warn "Something might be wrong"       # สีเหลือง + ⚠
-_er   "Fatal error occurred"           # สีแดง + ⛔
-_sc   "Operation completed"            # สีเขียว + ✅
-_ep   "Explanation details"            # สีฟ้าสดใส
-```
-
-### 7. Tables & Box Cards
-
-```bash
-# ctab "<style+color:width> ..." col1 col2 ...
-ctab "b82:20 244:30" "Command" "Description"
-ctab "46:20 250:30" "colors" "Standalone color engine"
-
-# Box card auto-fit
-box_card --border 82 "ez_colors" "---" "Version 3.0.0" "Ready to use"
+### 4. การ์ด Unicode อัตโนมัติ (Box Cards)
+```powershell
+box_card --border 82 "ez_colors" "---" "Version 3.0.0" "Windows & Linux Supported"
 ```
 
 ---
 
-## 🗂 Project Structure
+## 📦 โครงสร้างโปรเจกต์ (Dual-Engine)
 
 ```
 ez_colors/
-├── colors.sh          ← Main Entry (source ไฟล์นี้ไฟล์เดียวจบ)
-├── install.sh         ← Remote & local installer
-├── uninstall.sh       ← Uninstaller + clean ~/.bashrc
-├── test.sh            ← Automated Smoke Test
-├── README.md
-├── LICENSE
-└── lib/
-    ├── 00-escapes.sh  ← Low-level ANSI escapes (_c, _bg, _r...)
-    ├── 01-palette.sh  ← Palette SSOT
-    ├── 02-render.sh   ← c, cn, psc, cbg, cbgl
-    ├── 03-rainbow.sh  ← mc, rainbow_palette, jmc, mcbg, paint
-    ├── 04-random.sh   ← random_core, rc, rc1, rc2, rc3
-    ├── 05-rcc.sh      ← rcc, rcc1, rcc2, Rcc
-    ├── 06-table.sh    ← ctab, hline, box_card, get_real_width
-    └── 07-utils.sh    ← Status helpers, 256 charts
+├── ez_colors.psm1     ← 🪟 PowerShell Engine Module
+├── ez_colors.psd1     ← 🪟 PowerShell Manifest
+├── install.ps1        ← 🪟 Windows PowerShell One-liner Installer
+├── uninstall.ps1      ← 🪟 Windows PowerShell Uninstaller
+├── test.ps1           ← 🪟 PowerShell Automated Unit Tests
+│
+├── colors.sh          ← 🐧 Bash/Zsh Engine Entry
+├── install.sh         ← 🐧 Linux/macOS One-liner Installer
+├── uninstall.sh       ← 🐧 Linux/macOS Uninstaller
+├── test.sh            ← 🐧 Bash Automated Unit Tests
+├── demo.sh            ← 🐧 Visual Feature Showcase
+├── lib/               ← 🐧 Bash Modular Libs
+│   ├── 00-escapes.sh
+│   ├── 01-palette.sh
+│   ├── 02-render.sh
+│   ├── 03-rainbow.sh
+│   ├── 04-random.sh
+│   ├── 05-rcc.sh
+│   ├── 06-table.sh
+│   └── 07-utils.sh
+│
+├── README.md          ← Document แนะนำวิธีใช้งาน
+└── LICENSE            ← MIT License
 ```
 
 ---
