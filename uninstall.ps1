@@ -47,3 +47,4 @@ foreach ($prof in $ProfilePaths) {
 }
 
 Write-Host "$ModuleName uninstalled. Restart your PowerShell session." -ForegroundColor Yellow
+

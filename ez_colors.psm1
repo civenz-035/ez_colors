@@ -1,4 +1,4 @@
-# ============================================================
+﻿# ============================================================
 # ez_colors.psm1 — PowerShell Color Engine (Dual-Engine for Windows)
 # Zero-dependency, compatible with Windows PowerShell 5.1 & PowerShell 7+
 # ============================================================
@@ -124,9 +124,11 @@ function c {
         [Parameter(Position=1)]
         [string]$StyleOrText,
         [Parameter(Position=2, ValueFromRemainingArguments=$true)]
-        [string[]]$Text
+        [string[]]$Text,
+        [switch]$PassThru
     )
     $output = script:Render-Text $Color $StyleOrText $Text
+    if ($PassThru) { return $output }
     [Console]::Write($output)
 }
 
@@ -139,9 +141,11 @@ function cn {
         [Parameter(Position=1)]
         [string]$StyleOrText,
         [Parameter(Position=2, ValueFromRemainingArguments=$true)]
-        [string[]]$Text
+        [string[]]$Text,
+        [switch]$PassThru
     )
     $output = script:Render-Text $Color $StyleOrText $Text
+    if ($PassThru) { return $output }
     [Console]::WriteLine($output)
 }
 
@@ -152,13 +156,15 @@ function cbg {
     param(
         [Parameter(Mandatory=$true, Position=0)]$BgColor,
         [Parameter(Position=1, ValueFromRemainingArguments=$true)][string[]]$Text,
-        [switch]$Newline
+        [switch]$Newline,
+        [switch]$PassThru
     )
     $bgCode = script:Resolve-ColorCode "$BgColor"
     if ($null -eq $bgCode) { $bgCode = 240 }
     $str = $Text -join ' '
     $bgEsc = script:Get-Bg $bgCode
     $out = "${bgEsc}${str}$script:RESET_BG"
+    if ($PassThru) { return $out }
     if ($Newline) { [Console]::WriteLine($out) } else { [Console]::Write($out) }
 }
 
@@ -171,7 +177,8 @@ function mc {
     [CmdletBinding()]
     param(
         [Parameter(ValueFromRemainingArguments=$true)]
-        [string[]]$Arguments
+        [string[]]$Arguments,
+        [switch]$PassThru
     )
     $paletteKeys = @()
     $style = ""
@@ -225,6 +232,8 @@ function mc {
         $null = $sb.Append("${styleEsc}${fgEsc}${ch}")
     }
     $null = $sb.Append($script:RST)
+
+    if ($PassThru) { return $sb.ToString() }
     [Console]::WriteLine($sb.ToString())
 }
 
@@ -238,7 +247,8 @@ function rc {
         [Parameter(Position=0)][string]$SlotOrStyle,
         [Parameter(Position=1, ValueFromRemainingArguments=$true)][string[]]$Text,
         [string]$Slot = "",
-        [string]$Palette = "default"
+        [string]$Palette = "default",
+        [switch]$PassThru
     )
     $pal = if ($script:RC_PALETTES.ContainsKey($Palette)) { $script:RC_PALETTES[$Palette] } else { $script:RC_PALETTES['default'] }
     
@@ -253,7 +263,7 @@ function rc {
     }
     $script:LAST_COLOR = $pickedColor
 
-    cn "$pickedColor" $SlotOrStyle $Text
+    cn "$pickedColor" $SlotOrStyle $Text -PassThru:$PassThru
 }
 
 function rc1 { rc @args -Palette 'pastel' }
@@ -268,7 +278,8 @@ function rcc {
     param(
         [Parameter(Position=0)][string]$StyleOrText,
         [Parameter(Position=1, ValueFromRemainingArguments=$true)][string[]]$RemainingText,
-        [string]$Palette = 'default'
+        [string]$Palette = 'default',
+        [switch]$PassThru
     )
     $pal = if ($script:RC_PALETTES.ContainsKey($Palette)) { $script:RC_PALETTES[$Palette] } else { $script:RC_PALETTES['default'] }
     $style = ""
@@ -300,6 +311,8 @@ function rcc {
         $null = $sb.Append("${styleEsc}${fgEsc}${ch}")
     }
     $null = $sb.Append($script:RST)
+
+    if ($PassThru) { return $sb.ToString() }
     [Console]::WriteLine($sb.ToString())
 }
 
@@ -309,11 +322,11 @@ function rcc2 { rcc @args -Palette 'neon' }
 # ============================================================
 # 7. Status Helpers
 # ============================================================
-function _warn { cn 'y'   'b' "$($args -join ' ') ⚠" }
-function _er   { cn '196' 'b' "$($args -join ' ') ⛔" }
-function _sc   { cn 'lg'  'b' "$($args -join ' ') ✅" }
+function _warn { cn 'y'   'b' "$($args -join ' ') ⚠" -PassThru:$args.Contains('-PassThru') }
+function _er   { cn '196' 'b' "$($args -join ' ') ⛔" -PassThru:$args.Contains('-PassThru') }
+function _sc   { cn 'lg'  'b' "$($args -join ' ') ✅" -PassThru:$args.Contains('-PassThru') }
 function _ok   { _sc @args }
-function _ep   { cn '45'  'b' "$($args -join ' ') ℹ" }
+function _ep   { cn '45'  'b' "$($args -join ' ') ℹ" -PassThru:$args.Contains('-PassThru') }
 
 # ============================================================
 # 8. Tables, Dividers & Box Cards

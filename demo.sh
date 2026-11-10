@@ -83,3 +83,4 @@ box_card --border 208 \
     "curl -fsSL https://raw.githubusercontent.com/civenz-035/ez_colors/main/install.sh | bash -s -- --rc"
 
 echo ""
+
